@@ -1,13 +1,11 @@
-
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 20px;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
 }
-
 h1 {
     margin-bottom: 5px;
     text-align: center;
@@ -16,7 +14,6 @@ h1 {
     margin-bottom: 20px;
     text-align: center;
 }
-
 h2 {
     border-bottom: 3px solid #000;
     padding-bottom: 5px;
@@ -25,23 +22,28 @@ h2 {
     margin-bottom: 20px;
 }
 .item {
-    margin-bottom: 10px;
-    position: relative;
+    margin-bottom: 20px;
+}
+.item-header-row {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 .item-left {
     flex: 1;
 }
 .item-right {
     text-align: right;
-    min-width: 30%;
 }
 .item-header {
     font-weight: bold;
 }
 .item-subheader, .item-date {
     font-style: italic;
+}
+.item-body {
+    width: 100%;
+    clear: both;
 }
 [contenteditable] {
     outline: none;
