@@ -1,23 +1,29 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    margin: 0;
     padding: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
 }
+
+.resume {
+    margin: 0 0 0 600px; 
+    max-width: 1000px;
+} 
+
 h1 {
     margin-bottom: 5px;
     text-align: center;
 }
+
 .contact-info {
     margin-bottom: 20px;
     text-align: center;
 }
+
 h2 {
     border-bottom: 3px solid #000;
     padding-bottom: 5px;
 }
+
 .section {
     margin-bottom: 20px;
 }
