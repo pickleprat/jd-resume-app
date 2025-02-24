@@ -4,10 +4,27 @@ body {
     padding: 20px;
 }
 
-.resume {
-    margin: 0 0 0 600px; 
-    max-width: 1000px;
+.container {
+    display: flex; 
+    flex-direction: row;
+
 } 
+
+.resume-container {
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+} 
+
+.resume {
+    padding: 25px; 
+    border: 2px solid; 
+    margin: 0 0 0 800px; 
+    max-width: 1300px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
+    box-sizing: border-box;
+} 
+
 
 h1 {
     margin-bottom: 5px;
