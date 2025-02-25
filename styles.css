@@ -126,11 +126,9 @@ h2 {
 .section {
     margin-bottom: 20px;
 }
-
 .item {
     margin-bottom: 20px;
 }
-
 .item-header-row {
     display: flex;
     justify-content: space-between;
