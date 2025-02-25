@@ -19,7 +19,7 @@ body {
 .resume {
     padding: 25px; 
     border: 2px solid; 
-    margin: 0 0 0 800px; 
+    margin: 0 0 0 600px; 
     max-width: 1300px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
     box-sizing: border-box;
