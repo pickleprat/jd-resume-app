@@ -43,7 +43,7 @@ function addLinksToResume() : void {
     (document.getElementById("contact-info") as HTMLElement).innerHTML = tagContent; 
 } 
 
-function modifySectionsInResume(jobDescription: string, sectionContent: string): string {
+async function modifySectionsInResume(jobDescription: string, sectionContent: string): Promise<string> {
 	let apiKey: string = (document.getElementById("api-key") as HTMLInputElement).value; 
 	const geminiApiUrl : string = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`
 
@@ -71,18 +71,47 @@ function modifySectionsInResume(jobDescription: string, sectionContent: string):
 
     ### HTML UNORDERED LIST OUTPUT ###
     `
+    try {
+        const response = await fetch(geminiApiUrl, {
+            method: "POST", 
+            headers: {
+                "Content-Type":"application/json", 
+            }, 
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ 
+                        text: prompt 
+                    }]
+                }]
+            })
+        })
 
-    fetch(geminiApiUrl)
-    return ""
+        if (!response.ok) {
+            throw new Error("Http response not ok"); 
+        } 
+
+        const data = await response.json() 
+        const generatedText : string = data.candidates[0].content.parts[0].text; 
+        return generatedText; 
+
+    } catch (err) {
+        console.log(err); 
+        return ""
+    }  
 } 
 
-function addChangesToResume() : void {
+async function addChangesToResume() : Promise<void> {
     let jobDescription: string = (document.getElementById("job-description") as HTMLTextAreaElement).value; 
     let itemBodies : HTMLCollectionOf<Element> = document.getElementsByClassName("item-body"); 
-    console.log(itemBodies); 
 
     for(let i = 0; i < itemBodies.length; i++) {
-        console.log(itemBodies.item(i)?.textContent) 
+        let inputBullets : string | null | undefined = itemBodies.item(i)?.textContent 
+        if(inputBullets) {
+            let modifiedResumePoints: string = await modifySectionsInResume(jobDescription, inputBullets)
+            if (modifiedResumePoints) {
+                (itemBodies.item(i) as HTMLElement).innerHTML = modifiedResumePoints.split("```html")[1].split("```")[0] 
+            } 
+        } 
     } 
 
     // this function here will add links to resume almost immediately with raw javascript
