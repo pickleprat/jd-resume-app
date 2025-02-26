@@ -102,6 +102,7 @@ async function modifySectionsInResume(jobDescription: string, sectionContent: st
 
 async function addChangesToResume() : Promise<void> {
     let jobDescription: string = (document.getElementById("job-description") as HTMLTextAreaElement).value; 
+    localStorage.getItem("originalCollection")
     let itemBodies : HTMLCollectionOf<Element> = document.getElementsByClassName("item-body"); 
 
     for(let i = 0; i < itemBodies.length; i++) {

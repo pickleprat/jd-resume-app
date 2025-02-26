@@ -123,6 +123,7 @@ function addChangesToResume() {
             switch (_b.label) {
                 case 0:
                     jobDescription = document.getElementById("job-description").value;
+                    localStorage.getItem("originalCollection");
                     itemBodies = document.getElementsByClassName("item-body");
                     i = 0;
                     _b.label = 1;
