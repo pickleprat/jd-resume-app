@@ -9,28 +9,36 @@
 	<script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
     <script>
         function CreatePDFfromHTML() {
-            var HTML_Width = $(".resume-container").width();
-            var HTML_Height = $(".resume-container").height();
+            var htmlContent = document.querySelector(".resume");
+            var HTML_Width = htmlContent.offsetWidth;
+            var HTML_Height = htmlContent.offsetHeight;
             var top_left_margin = 15;
-            var PDF_Width = HTML_Width + (top_left_margin * 2);
-            var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-            var canvas_image_width = HTML_Width;
-            var canvas_image_height = HTML_Height;
-        
-            var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
-        
-            html2canvas($(".resume-container")[0]).then(function (canvas) {
+            var PDF_Width = 595.28; // Standard A4 width in points
+            var PDF_Height = 841.89; // Standard A4 height in points
+            var scaleFactor = PDF_Width / HTML_Width; // Scale content to fit A4 width
+            
+            html2canvas(htmlContent, {
+                scale: 2,
+                useCORS: true
+            }).then(function (canvas) {
                 var imgData = canvas.toDataURL("image/jpeg", 1.0);
-                var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-                for (var i = 1; i <= totalPDFPages; i++) { 
-                    pdf.addPage(PDF_Width, PDF_Height);
-                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                var pdf = new jsPDF('p', 'pt', 'a4');
+                var imgHeight = canvas.height * scaleFactor;
+                var imgWidth = PDF_Width;
+                
+                if (imgHeight > PDF_Height) {
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, imgWidth - (top_left_margin * 2), PDF_Height - (top_left_margin * 2));
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin - PDF_Height, imgWidth - (top_left_margin * 2), PDF_Height - (top_left_margin * 2));
+                } else {
+                    pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, imgWidth - (top_left_margin * 2), imgHeight);
                 }
+                
                 pdf.save("resume.pdf");
-                $(".resume-container").hide();
+                htmlContent.style.display = "none";
             });
         }
+        
     </script>
 </head>
 <body>
