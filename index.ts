@@ -56,9 +56,11 @@ async function modifySectionsInResume(jobDescription: string, sectionContent: st
     1) You will be provided with a series of bullet points and a job description. 
     2) You will view each text of a bullet point and then modify it based on the job description to secure a good ATS score. 
     3) Your output will be an unordered list of HTML elements, with each modified bullet point as an HTML list item.  
+    4) Each list item must be contenteditable. 
     
     NOTE: 
-    * Your OUTPUT MUST be in HTML. 
+    * Your OUTPUT MUST be an HTML unordered list. 
+    * The list items must be contenteditable
     * Make sure to fix the spelling mistakes the job description and then generate the modified text. 
     * Make sure that the sentences are human-like. 
     * DO NOT HALLUCINATE
